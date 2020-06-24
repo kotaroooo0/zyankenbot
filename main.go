@@ -118,7 +118,3 @@ type TweetCreateEvent struct {
 		ScreenName string `json:"screen_name" form:"screen_name" binding:"required"`
 	} `json:"user" form:"user" binding:"required"`
 }
-
-type PostTwitterWebhookResponse struct {
-	SnowResortLabel string `json:"snow_resort"`
-}
