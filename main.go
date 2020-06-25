@@ -24,8 +24,8 @@ func main() {
 	}
 
 	r := gin.Default()
-	r.GET("/crc_check", HandlerCrcCheck)
-	r.POST("/twittter_activity", HandlerTwitterActivity)
+	r.GET("/twitter_webhook", HandlerCrcCheck)
+	r.POST("/twitter_webhook", HandlerTwitterActivity)
 	r.Run(":3000")
 }
 
