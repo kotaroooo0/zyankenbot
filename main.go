@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/ChimeraCoder/anaconda"
@@ -64,12 +65,15 @@ func HandlerTwitterActivity(c *gin.Context) {
 
 	// リプライがない、もしくはユーザが不正な場合は400を返す
 	if len(req.TweetCreateEvents) < 1 || req.UserID == req.TweetCreateEvents[0].User.IDStr {
-		c.JSON(http.StatusBadRequest, "No reply or Invalid user")
+		c.JSON(http.StatusBadRequest, "no reply or invalid user")
 		return
 	}
 
 	// リプライの内容を取得
 	replyText := req.TweetCreateEvents[0].Text
+
+	// @snowfall_botを消す
+	replyText = strings.Replace(replyText, "@snowfall_bot ", "", -1)
 
 	// 返信内容を生成
 	content := ContentByReplyText(replyText)
